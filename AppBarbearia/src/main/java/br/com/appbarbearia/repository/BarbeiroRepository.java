@@ -120,7 +120,7 @@ public class BarbeiroRepository extends JdbcRepository<Barbeiro> implements RowM
 	}
 
 	private int setValuesOnStatement(Barbeiro b, PreparedStatement stmt) throws SQLException {
-		int idx = 0;
+		int idx = 1;
 		stmt.setLong(idx++, b.getCodigoBarbearia());
 		stmt.setString(idx++, b.getNome());
 		stmt.setString(idx++, b.getRg());
