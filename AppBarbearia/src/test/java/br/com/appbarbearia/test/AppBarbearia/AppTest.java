@@ -1,4 +1,4 @@
-package br.com.appbarbearia.AppBarbearia;
+package br.com.appbarbearia.test.AppBarbearia;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

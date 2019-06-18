@@ -1,4 +1,4 @@
-package br.com.appbarbearia.repository.test;
+package br.com.appbarbearia.test.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -14,17 +14,15 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.appbarbearia.AppBarbearia.RunConfiguration;
 import br.com.appbarbearia.model.Cidade;
 import br.com.appbarbearia.model.Estados;
 import br.com.appbarbearia.repository.CidadeRepository;
-import br.com.appbarbearia.runconfig.RunConfiguration;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = RunConfiguration.class)
-@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = RunConfiguration.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CidadeRepositoryCrudTest {
 
