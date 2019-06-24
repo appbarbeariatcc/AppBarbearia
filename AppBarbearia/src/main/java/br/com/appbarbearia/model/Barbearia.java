@@ -2,28 +2,31 @@ package br.com.appbarbearia.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Barbearia implements Serializable {
 
 	private static final long serialVersionUID = -1931496073277262115L;
 
-	private int codigo;
+	private long codigo;
 	private String nome;
 	private String descricao;
+	private int codigoEndereco;
 	private Endereco endereco;
-//	private Horario horario;
 	private Calendar horarioAbertura;
 	private Calendar horarioFechamento;
+	private Date cadastro;
+	private Date alterado;
 	private List<Servico> servicos;
 	private List<Barbeiro> barbeiros;
-//	private List<Promocao> promocoes;
+	private List<Promocao> promocoes;
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -41,6 +44,14 @@ public class Barbearia implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public int getCodigoEndereco() {
+		return codigoEndereco;
+	}
+
+	public void setCodigoEndereco(int codigoEndereco) {
+		this.codigoEndereco = codigoEndereco;
 	}
 
 	public Endereco getEndereco() {
@@ -67,6 +78,22 @@ public class Barbearia implements Serializable {
 		this.horarioFechamento = horarioFechamento;
 	}
 
+	public Date getCadastro() {
+		return cadastro;
+	}
+
+	public void setCadastro(Date cadastro) {
+		this.cadastro = cadastro;
+	}
+
+	public Date getAlterado() {
+		return alterado;
+	}
+
+	public void setAlterado(Date alterado) {
+		this.alterado = alterado;
+	}
+
 	public List<Servico> getServicos() {
 		return servicos;
 	}
@@ -83,4 +110,19 @@ public class Barbearia implements Serializable {
 		this.barbeiros = barbeiros;
 	}
 
+	public List<Promocao> getPromocoes() {
+		return promocoes;
+	}
+
+	public void setPromocoes(List<Promocao> promocoes) {
+		this.promocoes = promocoes;
+	}
+
+	@Override
+	public String toString() {
+		return "Barbearia [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", codigoEndereco="
+				+ codigoEndereco + ", endereco=" + endereco + ", horarioAbertura=" + horarioAbertura
+				+ ", horarioFechamento=" + horarioFechamento + ", servicos=" + servicos + ", barbeiros=" + barbeiros
+				+ ", promocoes=" + promocoes + "]";
+	}
 }

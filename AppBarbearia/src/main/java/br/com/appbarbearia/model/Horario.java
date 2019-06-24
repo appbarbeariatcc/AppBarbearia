@@ -3,14 +3,13 @@ package br.com.appbarbearia.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Servico implements Serializable {
+public class Horario implements Serializable {
 
-	private static final long serialVersionUID = -3694300017473668994L;
+	private static final long serialVersionUID = -941515513807208076L;
 
 	private int codigo;
-	private long codigoBarbearia;
 	private String descricao;
-	private double preco;
+	private Date hora;
 	private Date cadastro;
 	private Date alterado;
 
@@ -22,14 +21,6 @@ public class Servico implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public long getCodigoBarbearia() {
-		return codigoBarbearia;
-	}
-
-	public void setCodigoBarbearia(long codigoBarbearia) {
-		this.codigoBarbearia = codigoBarbearia;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
@@ -38,12 +29,12 @@ public class Servico implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public double getPreco() {
-		return preco;
+	public Date getHora() {
+		return hora;
 	}
 
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setHora(Date hora) {
+		this.hora = hora;
 	}
 
 	public Date getCadastro() {
@@ -64,7 +55,7 @@ public class Servico implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Servico [codigo=" + codigo + ", codigoBarbearia=" + codigoBarbearia + ", descricao=" + descricao
-				+ ", preco=" + preco + ", cadastro=" + cadastro + ", alterado=" + alterado + "]";
+		return "Horario [codigo=" + codigo + ", descricao=" + descricao + ", hora=" + hora + ", cadastro=" + cadastro
+				+ ", alterado=" + alterado + "]";
 	}
 }

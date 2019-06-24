@@ -2,17 +2,13 @@ package br.com.appbarbearia.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
-public class Barbeiro implements Serializable {
+public class Cliente implements Serializable {
 
-	private static final long serialVersionUID = 2982174066743555439L;
+	private static final long serialVersionUID = 5601258188372565979L;
 
 	private long codigo;
-	private long codigoBarbearia;
 	private int codigoCidade;
-	private Cidade cidade;
 	private String nome;
 	private String rg;
 	private String cpf;
@@ -23,7 +19,6 @@ public class Barbeiro implements Serializable {
 	private Date dataNascimento;
 	private Date cadastro;
 	private Date alterado;
-	private List<HorarioMarcado> horariosMarcados = new LinkedList<>();
 
 	public long getCodigo() {
 		return codigo;
@@ -33,28 +28,12 @@ public class Barbeiro implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public long getCodigoBarbearia() {
-		return codigoBarbearia;
-	}
-
-	public void setCodigoBarbearia(long codigoBarbearia) {
-		this.codigoBarbearia = codigoBarbearia;
-	}
-
 	public int getCodigoCidade() {
 		return codigoCidade;
 	}
 
 	public void setCodigoCidade(int codigoCidade) {
 		this.codigoCidade = codigoCidade;
-	}
-
-	public Cidade getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
 	}
 
 	public String getNome() {
@@ -129,19 +108,10 @@ public class Barbeiro implements Serializable {
 		this.alterado = alterado;
 	}
 
-	public List<HorarioMarcado> getHorariosMarcados() {
-		return horariosMarcados;
-	}
-
-	public void setHorariosMarcados(List<HorarioMarcado> horariosMarcados) {
-		this.horariosMarcados = horariosMarcados;
-	}
-
 	@Override
 	public String toString() {
-		return "Barbeiro [codigo=" + codigo + ", codigoBarbearia=" + codigoBarbearia + ", codigoCidade=" + codigoCidade
-				+ ", cidade=" + cidade + ", nome=" + nome + ", rg=" + rg + ", cpf=" + cpf + ", foto=" + foto
-				+ ", dataNascimento=" + dataNascimento + ", cadastro=" + cadastro + ", alterado=" + alterado
-				+ ", horariosMarcados=" + horariosMarcados + "]";
+		return "Cliente [codigo=" + codigo + ", codigoCidade=" + codigoCidade + ", nome=" + nome + ", rg=" + rg
+				+ ", cpf=" + cpf + ", foto=" + foto + ", dataNascimento=" + dataNascimento + ", cadastro=" + cadastro
+				+ ", alterado=" + alterado + "]";
 	}
 }

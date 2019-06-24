@@ -8,13 +8,13 @@ public class Endereco implements Serializable {
 	private static final long serialVersionUID = 3705708728373168798L;
 
 	private int codigo;
-	private int cidadeCodigo;
+	private int codigoCidade;
 	private Cidade cidade;
 	private String endereço;
 	private int numero;
 	private String cep;
-	private Date criadoEm;
-	private Date alteradoEm;
+	private Date cadastro;
+	private Date alterado;
 
 	public int getCodigo() {
 		return codigo;
@@ -24,12 +24,12 @@ public class Endereco implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public int getCidadeCodigo() {
-		return cidadeCodigo;
+	public int getCodigoCidade() {
+		return codigoCidade;
 	}
 
-	public void setCidadeCodigo(int cidadeCodigo) {
-		this.cidadeCodigo = cidadeCodigo;
+	public void setCodigoCidade(int codigoCidade) {
+		this.codigoCidade = codigoCidade;
 	}
 
 	public Cidade getCidade() {
@@ -64,25 +64,26 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 
-	public Date getCriadoEm() {
-		return criadoEm;
+	public Date getCadastro() {
+		return cadastro;
 	}
 
-	public void setCriadoEm(Date criadoEm) {
-		this.criadoEm = criadoEm;
+	public void setCadastro(Date cadastro) {
+		this.cadastro = cadastro;
 	}
 
-	public Date getAlteradoEm() {
-		return alteradoEm;
+	public Date getAlterado() {
+		return alterado;
 	}
 
-	public void setAlteradoEm(Date alteradoEm) {
-		this.alteradoEm = alteradoEm;
+	public void setAlterado(Date alterado) {
+		this.alterado = alterado;
 	}
 
 	@Override
 	public String toString() {
-		return "Endereco [codigo=" + codigo + ", cidade=" + cidade + ", endereço=" + endereço + ", numero=" + numero
-				+ ", cep=" + cep + ", criadoEm=" + criadoEm + ", alteradoEm=" + alteradoEm + "]";
+		return "Endereco [codigo=" + codigo + ", codigoCidade=" + codigoCidade + ", cidade=" + cidade + ", endereço="
+				+ endereço + ", numero=" + numero + ", cep=" + cep + ", cadastro=" + cadastro + ", alterado=" + alterado
+				+ "]";
 	}
 }
