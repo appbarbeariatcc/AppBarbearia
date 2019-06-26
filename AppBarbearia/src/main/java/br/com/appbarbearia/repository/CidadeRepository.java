@@ -68,28 +68,28 @@ public class CidadeRepository extends JdbcRepository<Cidade> implements RowMappe
 		}
 	}
 
-	private Optional<Cidade> saveOld(final Cidade Cidade, boolean refresh) {
+	private Optional<Cidade> saveOld(final Cidade cidade, boolean refresh) {
 		String sql = getUpdate();
 		int row = this.jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement stmt = connection.prepareStatement(sql);
-				int idx = setValuesOnStatement(Cidade, stmt);
-				stmt.setLong(idx++, Cidade.getCodigo());
+				int idx = setValuesOnStatement(cidade, stmt);
+				stmt.setLong(idx++, cidade.getCodigo());
 				return stmt;
 			}
 		});
 		if (row > 0) {
 			if (refresh) {
-				Optional<Cidade> opCidade = findByCodigo(Cidade.getCodigo());
-				LOGGER.log(Level.INFO, "Alterou {0}", (opCidade.isPresent() ? opCidade.get() : Cidade));
+				Optional<Cidade> opCidade = findByCodigo(cidade.getCodigo());
+				LOGGER.log(Level.INFO, "Alterou {0}", (opCidade.isPresent() ? opCidade.get() : cidade));
 				return opCidade;
 			} else {
-				LOGGER.log(Level.INFO, "Alterou {0}", Cidade);
+				LOGGER.log(Level.INFO, "Alterou {0}", cidade);
 			}
 		} else {
-			LOGGER.log(Level.INFO, "Não alterou {0}", Cidade);
+			LOGGER.log(Level.INFO, "Não alterou {0}", cidade);
 		}
-		return Optional.of(Cidade);
+		return Optional.of(cidade);
 	}
 
 	private Optional<Cidade> saveNew(final Cidade cidade, boolean refresh) {
@@ -108,9 +108,9 @@ public class CidadeRepository extends JdbcRepository<Cidade> implements RowMappe
 
 		if (row > 0) {
 			if (refresh) {
-				Optional<Cidade> opBarbeiro = findByCodigo(cidade.getCodigo());
-				LOGGER.log(Level.INFO, "Criou {0}", (opBarbeiro.isPresent() ? opBarbeiro.get() : cidade));
-				return opBarbeiro;
+				Optional<Cidade> opCidade = findByCodigo(cidade.getCodigo());
+				LOGGER.log(Level.INFO, "Criou {0}", (opCidade.isPresent() ? opCidade.get() : cidade));
+				return opCidade;
 			} else {
 				LOGGER.log(Level.INFO, "Criou {0}", cidade);
 			}

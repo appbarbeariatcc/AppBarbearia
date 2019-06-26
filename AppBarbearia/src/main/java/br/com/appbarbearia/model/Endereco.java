@@ -10,7 +10,7 @@ public class Endereco implements Serializable {
 	private int codigo;
 	private int codigoCidade;
 	private Cidade cidade;
-	private String endereço;
+	private String endereco;
 	private int numero;
 	private String cep;
 	private Date cadastro;
@@ -40,12 +40,12 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public String getEndereço() {
-		return endereço;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public int getNumero() {
@@ -83,7 +83,7 @@ public class Endereco implements Serializable {
 	@Override
 	public String toString() {
 		return "Endereco [codigo=" + codigo + ", codigoCidade=" + codigoCidade + ", cidade=" + cidade + ", endereço="
-				+ endereço + ", numero=" + numero + ", cep=" + cep + ", cadastro=" + cadastro + ", alterado=" + alterado
+				+ endereco + ", numero=" + numero + ", cep=" + cep + ", cadastro=" + cadastro + ", alterado=" + alterado
 				+ "]";
 	}
 }
