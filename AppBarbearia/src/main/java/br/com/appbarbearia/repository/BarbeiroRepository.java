@@ -131,11 +131,14 @@ public class BarbeiroRepository extends JdbcRepository<Barbeiro> implements RowM
 	}
 
 	protected void setValues(Barbeiro b, ResultSet rs) throws SQLException {
-		b.setCodigo(rs.getLong("CODIGO"));
+		b.setCodigo(rs.getInt("CODIGO"));
 		b.setCodigoBarbearia(rs.getLong("CODIGO_BARBEARIA"));
+		b.setCodigoCidade(rs.getInt("CODIGO_CIDADE"));
 		b.setNome(rs.getString("NOME"));
 		b.setRg(rs.getString("RG"));
 		b.setCpf(rs.getString("CPF"));
+		b.setTelefone(rs.getInt("TELEFONE"));
+		b.setCelular(rs.getInt("CELULAR"));
 		b.setFoto(rs.getString("FOTO"));
 		b.setDataNascimento(rs.getDate("DATA_NASCIMENTO"));
 		b.setCadastro(rs.getDate("CADASTRO"));
@@ -185,18 +188,18 @@ public class BarbeiroRepository extends JdbcRepository<Barbeiro> implements RowM
 	}
 
 	public String getSelect() {
-		return "SELECT B.CODIGO, B.CODIGO_BARBEARIA, B.NOME, B.RG, B.CPF, B.FOTO, B.DATA_NASCIMENTO, B.CADASTRO, B.ALTERADO FROM barbeiro";
+		return "SELECT B.CODIGO, B.CODIGO_BARBEARIA, B.CODIGO_CIDADE, B.NOME, B.RG, B.CPF, B.TELEFONE, B.CELULAR, B.FOTO, B.DATA_NASCIMENTO, B.CADASTRO, B.ALTERADO FROM BARBEIRO B";
 	}
 
 	public String getInsert() {
-		return "INSERT INTO barbeiro (CODIGO_BARBEARIA, NOME, RG, CPF, FOTO, DATA_NASCIMENTO, CADASTRO, ALTERADO VALUES(?,?,?,?,?,?,NOW(),NOW())";
+		return "INSERT INTO BARBEIRO (CODIGO_BARBEARIA, CODIGO_CIDADE, NOME, RG, CPF, TELEFONE, CELULAR, FOTO, DATA_NASCIMENTO, CADASTRO, ALTERADO VALUES(?,?,?,?,?,?,?,?,?,NOW(),NOW())";
 	}
 
 	public String getUpdate() {
-		return "UPDATE barbeiro SET CODIGO_BARBEARIA=?,NOME=?,RG=?,CPF=?,DATA_NASCIMENTO=?,ALTERADO=NOW() WHERE CODIGO =?";
+		return "UPDATE BARBEIRO SET CODIGO_BARBEARIA=?,NOME=?,RG=?,CPF=?,DATA_NASCIMENTO=?,ALTERADO=NOW() WHERE CODIGO =?";
 	}
 
 	public String getDelete() {
-		return "DELETE FROM barbeiro WHERE CODIGO=?";
+		return "DELETE FROM BARBEIRO WHERE CODIGO=?";
 	}
 }
