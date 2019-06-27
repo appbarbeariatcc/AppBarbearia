@@ -24,10 +24,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.appbarbearia.model.Endereco;
 import br.com.appbarbearia.util.JdbcRepository;
 
+@Transactional
 @Repository
 public class EnderecoRepository extends JdbcRepository<Endereco> implements RowMapper<Endereco>{
 	

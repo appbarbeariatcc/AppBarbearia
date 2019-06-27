@@ -1,7 +1,6 @@
 package br.com.appbarbearia.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +13,8 @@ public class Barbearia implements Serializable {
 	private String descricao;
 	private int codigoEndereco;
 	private Endereco endereco;
-	private Calendar horarioAbertura;
-	private Calendar horarioFechamento;
+	private Date horarioAbertura;
+	private Date horarioFechamento;
 	private Date cadastro;
 	private Date alterado;
 	private List<Servico> servicos;
@@ -62,19 +61,19 @@ public class Barbearia implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public Calendar getHorarioAbertura() {
+	public Date getHorarioAbertura() {
 		return horarioAbertura;
 	}
 
-	public void setHorarioAbertura(Calendar horarioAbertura) {
+	public void setHorarioAbertura(Date horarioAbertura) {
 		this.horarioAbertura = horarioAbertura;
 	}
 
-	public Calendar getHorarioFechamento() {
+	public Date getHorarioFechamento() {
 		return horarioFechamento;
 	}
 
-	public void setHorarioFechamento(Calendar horarioFechamento) {
+	public void setHorarioFechamento(Date horarioFechamento) {
 		this.horarioFechamento = horarioFechamento;
 	}
 

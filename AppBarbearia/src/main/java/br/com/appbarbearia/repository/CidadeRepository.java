@@ -34,7 +34,7 @@ import br.com.appbarbearia.util.JdbcRepository;
 @Repository
 public class CidadeRepository extends JdbcRepository<Cidade> implements RowMapper<Cidade> {
 
-	Logger LOGGER = Logger.getLogger(BarbeiroRepository.class.getName());
+	Logger LOGGER = Logger.getLogger(CidadeRepository.class.getName());
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -172,7 +172,7 @@ public class CidadeRepository extends JdbcRepository<Cidade> implements RowMappe
 		}
 	}
 
-	@Cacheable(value = "barbeiros")
+	@Cacheable(value = "cidades")
 	public List<Cidade> findAll() {
 		return jdbcTemplate.query(getSelect(), this);
 	}
