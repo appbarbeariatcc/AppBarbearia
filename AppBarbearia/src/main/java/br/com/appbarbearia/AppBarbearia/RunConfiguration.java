@@ -29,7 +29,7 @@ public class RunConfiguration extends SpringBootServletInitializer {
 
 	@PostConstruct
     void started() {
-      TimeZone.setDefault(TimeZone.getTimeZone("Brazil/East"));
+      TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
     }
 	
 	private static Class<RunConfiguration> applicationClass = RunConfiguration.class;
