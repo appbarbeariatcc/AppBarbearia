@@ -8,12 +8,14 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.TimeZoneEditor;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -62,6 +64,7 @@ public class BarbeariaRepositoryCrudTest{
 		b.setNome(BARBEARIA_NOME_1);
 		b.setDescricao(BARBEARIA_DESCRICAO_1);
 		b.setCodigoEndereco(BARBEARIA_CODIGO_ENDERECO_1);
+//		calendar.setTimeZone(TimeZone.getTimeZone("Brazil/East"));
 		calendar.set(Calendar.HOUR_OF_DAY, 9);
 		calendar.set(Calendar.MINUTE, 0);
 		b.setHorarioAbertura(calendar.getTime());

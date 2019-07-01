@@ -1,5 +1,9 @@
 package br.com.appbarbearia.AppBarbearia;
 
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,5 +27,10 @@ public class RunConfiguration extends SpringBootServletInitializer {
 		return application.sources(applicationClass);
 	}
 
+	@PostConstruct
+    void started() {
+      TimeZone.setDefault(TimeZone.getTimeZone("Brazil/East"));
+    }
+	
 	private static Class<RunConfiguration> applicationClass = RunConfiguration.class;
 }
