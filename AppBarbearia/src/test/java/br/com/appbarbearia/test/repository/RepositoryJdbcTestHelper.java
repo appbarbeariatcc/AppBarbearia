@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import br.com.appbarbearia.model.Barbeiro;
 import br.com.appbarbearia.model.Cidade;
 import br.com.appbarbearia.model.Endereco;
 import br.com.appbarbearia.model.Estados;
@@ -13,6 +14,9 @@ import br.com.appbarbearia.repository.*;
 public class RepositoryJdbcTestHelper {
 
 	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	BarbeiroRepository barbeiroRepository;
 
 	@Autowired
 	CidadeRepository cidadeRepository;
@@ -62,4 +66,24 @@ public class RepositoryJdbcTestHelper {
 			enderecoRepository.save(endereco);
 		}
 	}
+	public void criarBarbeiro() {
+		criarCidade();
+		
+		String[][] barbeiroData = new String[][] {
+			{"1", "LUGOR", "50.037.334-6", "433044988/93", "46021192", "972932872"},
+			{"1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511"}		
+	};
+	for (String[] barbeiroInfo: barbeiroData) {
+		int idx = 0;
+		Barbeiro barbeiro = new Barbeiro();
+		barbeiro.setCodigoCidade(Integer.parseInt(barbeiroInfo[idx++]));
+		barbeiro.setNome(barbeiroInfo[idx++]);
+		barbeiro.setRg(barbeiroInfo[idx++]);
+		barbeiro.setCpf(barbeiroInfo[idx++]);
+		barbeiro.setTelefone(Integer.parseInt(barbeiroInfo[idx++]));
+		barbeiro.setCelular(Integer.parseInt(barbeiroInfo[idx++]));
+		barbeiroRepository.save(barbeiro);
+	}
+	}
 }
+	
