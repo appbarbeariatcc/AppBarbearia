@@ -8,14 +8,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
-import java.util.TimeZone;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.TimeZoneEditor;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -131,7 +129,7 @@ public class BarbeariaRepositoryCrudTest{
 		System.out.println("Test04_List, Ok");
 	}
 
-//	@Test
+	@Test
 	public void test05_delete1() {
 		Optional<Barbearia> opBarbearia = barbeariaRepository.findByCodigo(codigoAdicionado1);
 		assertTrue(opBarbearia.isPresent());

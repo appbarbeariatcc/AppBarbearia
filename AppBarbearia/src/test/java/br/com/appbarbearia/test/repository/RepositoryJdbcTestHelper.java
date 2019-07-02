@@ -31,10 +31,14 @@ public class RepositoryJdbcTestHelper {
 	public void limpaBancoDeDados() {
 		jdbcTemplate.execute("DELETE FROM BARBEARIA");
 		jdbcTemplate.execute("ALTER TABLE BARBEARIA AUTO_INCREMENT = 0");
+		jdbcTemplate.execute("DELETE FROM BARBEIRO");
+		jdbcTemplate.execute("ALTER TABLE BARBEIRO AUTO_INCREMENT = 0");
 		jdbcTemplate.execute("DELETE FROM ENDERECO");
 		jdbcTemplate.execute("ALTER TABLE ENDERECO AUTO_INCREMENT = 0");
 		jdbcTemplate.execute("DELETE FROM CIDADE");
 		jdbcTemplate.execute("ALTER TABLE CIDADE AUTO_INCREMENT = 0");
+		jdbcTemplate.execute("DELETE FROM HORARIO");
+		jdbcTemplate.execute("ALTER TABLE HORARIO AUTO_INCREMENT = 0");
 	}
 
 	public void criarCidade() {
