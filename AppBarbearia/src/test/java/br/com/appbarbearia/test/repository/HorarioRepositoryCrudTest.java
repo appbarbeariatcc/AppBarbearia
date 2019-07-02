@@ -17,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.appbarbearia.AppBarbearia.RunConfiguration;
-import br.com.appbarbearia.model.Barbearia;
 import br.com.appbarbearia.model.Horario;
 import br.com.appbarbearia.repository.HorarioRepository;
 
