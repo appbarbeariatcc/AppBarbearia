@@ -125,6 +125,8 @@ public class BarbeiroRepository extends JdbcRepository<Barbeiro> implements RowM
 		stmt.setString(idx++, b.getNome());
 		stmt.setString(idx++, b.getRg());
 		stmt.setString(idx++, b.getCpf());
+		stmt.setInt(idx++, b.getTelefone());
+		stmt.setInt(idx++,  b.getCelular());
 		setNullSafe(stmt, b.getFoto(), idx++);
 		setNullSafe(stmt, b.getDataNascimento(), idx++);
 		return idx;
@@ -196,7 +198,7 @@ public class BarbeiroRepository extends JdbcRepository<Barbeiro> implements RowM
 	}
 
 	public String getUpdate() {
-		return "UPDATE BARBEIRO SET CODIGO_BARBEARIA=?,NOME=?,RG=?,CPF=?,DATA_NASCIMENTO=?,ALTERADO=NOW() WHERE CODIGO =?";
+		return "UPDATE BARBEIRO SET CODIGO_BARBEARIA=?, NOME=?, RG=?, CPF=?, DATA_NASCIMENTO=?, ALTERADO=NOW() WHERE CODIGO =?";
 	}
 
 	public String getDelete() {

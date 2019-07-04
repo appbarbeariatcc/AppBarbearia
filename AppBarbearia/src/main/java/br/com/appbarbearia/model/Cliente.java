@@ -1,4 +1,4 @@
-package br.com.appbarbearia.model;
+package br.com.appbarbearia. model;
 
 import java.io.Serializable;
 import java.util.Date;
