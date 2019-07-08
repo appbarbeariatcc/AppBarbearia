@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.appbarbearia.model.Barbeiro;
 import br.com.appbarbearia.model.Cidade;
+import br.com.appbarbearia.model.Cliente;
 import br.com.appbarbearia.model.Endereco;
 import br.com.appbarbearia.model.Estados;
 import br.com.appbarbearia.repository.*;
@@ -23,6 +24,9 @@ public class RepositoryJdbcTestHelper {
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
+
+	@Autowired
+	ClienteRepository clienteRepository;
 	
 	public RepositoryJdbcTestHelper(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -89,5 +93,26 @@ public class RepositoryJdbcTestHelper {
 		barbeiroRepository.save(barbeiro);
 	}
 	}
+	public void criarCliente(){
+		criarCliente();
+
+		String[][] clienteData = new String[][] {
+			{"1", "LUGOR", "50.037.334-6", "433044988/93", "46021192", "972932872"},
+			{"1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511"}	
+		};
+		for (String[] clienteInfo: clienteData){
+			int idx = 0;
+			Cliente cliente = new Cliente();
+			cliente.setCodigo(Integer.parseInt(clienteInfo[idx++]));
+			cliente.setNome(clienteInfo[idx++]);
+			cliente.setRg(clienteInfo[idx++]);
+			cliente.setCpf(clienteInfo[idx++]);
+			cliente.setTelefone(Integer.parseInt(clienteInfo[idx++]));
+			cliente.setCelular(Integer.parseInt(clienteInfo[idx++]));
+			clienteRepository.save(cliente);
+		}
+	}
+
+	
 }
 	
