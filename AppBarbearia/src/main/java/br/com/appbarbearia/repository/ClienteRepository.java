@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -103,7 +104,7 @@ public class ClienteRepository extends JdbcRepository<Cliente> implements RowMap
 			}
 		}, keyHolder);
 
-		cliente.setCodigo(keyHolder.getKey().intValue());
+		cliente.setCodigo(keyHolder.getKey().longValue());
 
 		if (row > 0) {
 			if (refresh) {
@@ -121,14 +122,14 @@ public class ClienteRepository extends JdbcRepository<Cliente> implements RowMap
 
 	private int setValuesOnStatement(Cliente c, PreparedStatement stmt) throws SQLException {
 		int idx = 1;
-		stmt.setLong(idx++, c.getCodigo());
+		stmt.setInt(idx++, c.getCodigoCidade());
 		stmt.setString(idx++, c.getNome());
 		stmt.setString(idx++, c.getRg());
 		stmt.setString(idx++, c.getCpf());
 		stmt.setInt(idx++, c.getTelefone());
 		stmt.setInt(idx++, c.getCelular());
 		setNullSafe(stmt, c.getFoto(), idx++);
-		setNullSafe(stmt, c.getDataNascimento(), idx++);
+		stmt.setTimestamp(idx++, new Timestamp(c.getDataNascimento().getTime()));
 		return idx;
 	}
 
@@ -187,11 +188,11 @@ public class ClienteRepository extends JdbcRepository<Cliente> implements RowMap
 	}
 
 	private String getSelect() {
-		return "SELECT C.CODIGO, C.CODIGO_CIDADE, C.NOME, C.RG, C.CPF, C.TELEFONE, C.CELULAR, C.FOTO, C,DATA_NASCIMENTO,  C.CADASTRO, C.ALTERADO FROM CLIENTE C";
+		return "SELECT C.CODIGO, C.CODIGO_CIDADE, C.NOME, C.RG, C.CPF, C.TELEFONE, C.CELULAR, C.FOTO, C.DATA_NASCIMENTO, C.CADASTRO, C.ALTERADO FROM CLIENTE C";
 	}
 
 	private String getInsert() {
-		return "INSERT INTO CIDADE (CODIGO, NOME, RG, CPF, TELEFONE, CELULAR, FOTO, DATA_NASCIMENTO, CADASTRO, ALTERADO) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())";
+		return "INSERT INTO CLIENTE (CODIGO_CIDADE, NOME, RG, CPF, TELEFONE, CELULAR, FOTO, DATA_NASCIMENTO, CADASTRO, ALTERADO) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())";
 	}
 
 	private String getUpdate() {

@@ -1,5 +1,7 @@
 package br.com.appbarbearia.test.repository;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -9,13 +11,18 @@ import br.com.appbarbearia.model.Cidade;
 import br.com.appbarbearia.model.Cliente;
 import br.com.appbarbearia.model.Endereco;
 import br.com.appbarbearia.model.Estados;
-import br.com.appbarbearia.repository.*;
+import br.com.appbarbearia.model.Horario;
+import br.com.appbarbearia.repository.BarbeiroRepository;
+import br.com.appbarbearia.repository.CidadeRepository;
+import br.com.appbarbearia.repository.ClienteRepository;
+import br.com.appbarbearia.repository.EnderecoRepository;
+import br.com.appbarbearia.repository.HorarioRepository;
 
 @Component
 public class RepositoryJdbcTestHelper {
 
 	JdbcTemplate jdbcTemplate;
-	
+
 	@Autowired
 	BarbeiroRepository barbeiroRepository;
 
@@ -26,13 +33,24 @@ public class RepositoryJdbcTestHelper {
 	EnderecoRepository enderecoRepository;
 
 	@Autowired
+	HorarioRepository horarioRepository;
+
+	@Autowired
 	ClienteRepository clienteRepository;
-	
+
 	public RepositoryJdbcTestHelper(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	public void limpaBancoDeDados() {
+		jdbcTemplate.execute("DELETE FROM HORARIO_MARCADO");
+		jdbcTemplate.execute("ALTER TABLE HORARIO_MARCADO AUTO_INCREMENT = 0");
+		jdbcTemplate.execute("DELETE FROM CLIENTE");
+		jdbcTemplate.execute("ALTER TABLE CLIENTE AUTO_INCREMENT = 0");
+		// jdbcTemplate.execute("DELETE FROM PROMOCAO");
+		// jdbcTemplate.execute("ALTER TABLE PROMOCAO AUTO_INCREMENT = 0");
+		jdbcTemplate.execute("DELETE FROM SERVICO");
+		jdbcTemplate.execute("ALTER TABLE SERVICO AUTO_INCREMENT = 0");
 		jdbcTemplate.execute("DELETE FROM BARBEARIA");
 		jdbcTemplate.execute("ALTER TABLE BARBEARIA AUTO_INCREMENT = 0");
 		jdbcTemplate.execute("DELETE FROM BARBEIRO");
@@ -56,15 +74,13 @@ public class RepositoryJdbcTestHelper {
 			cidadeRepository.save(cidade);
 		}
 	}
-	
+
 	public void criarEndereco() {
 		criarCidade();
-		
-		String[][] enderecoData = new String[][] {
-			{"1", "Rua Coelho Neto", "338", "13320-520"},
-			{"1", "Rua Brasil", "257", "13320-500"}
-		};
-		for (String[] enderecoInfo: enderecoData) {
+
+		String[][] enderecoData = new String[][] { { "1", "Rua Coelho Neto", "338", "13320-520" },
+				{ "1", "Rua Brasil", "257", "13320-500" } };
+		for (String[] enderecoInfo : enderecoData) {
 			int idx = 0;
 			Endereco endereco = new Endereco();
 			endereco.setCodigoCidade(Integer.parseInt(enderecoInfo[idx++]));
@@ -74,33 +90,56 @@ public class RepositoryJdbcTestHelper {
 			enderecoRepository.save(endereco);
 		}
 	}
+
 	public void criarBarbeiro() {
 		criarCidade();
-		
+
 		String[][] barbeiroData = new String[][] {
-			{"1", "LUGOR", "50.037.334-6", "433044988/93", "46021192", "972932872"},
-			{"1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511"}		
-	};
-	for (String[] barbeiroInfo: barbeiroData) {
-		int idx = 0;
-		Barbeiro barbeiro = new Barbeiro();
-		barbeiro.setCodigoCidade(Integer.parseInt(barbeiroInfo[idx++]));
-		barbeiro.setNome(barbeiroInfo[idx++]);
-		barbeiro.setRg(barbeiroInfo[idx++]);
-		barbeiro.setCpf(barbeiroInfo[idx++]);
-		barbeiro.setTelefone(Integer.parseInt(barbeiroInfo[idx++]));
-		barbeiro.setCelular(Integer.parseInt(barbeiroInfo[idx++]));
-		barbeiroRepository.save(barbeiro);
+				{ "1", "LUGOR", "50.037.334-6", "433044988/93", "46021192", "972932872" },
+				{ "1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511" } };
+		for (String[] barbeiroInfo : barbeiroData) {
+			int idx = 0;
+			Barbeiro barbeiro = new Barbeiro();
+			barbeiro.setCodigoCidade(Integer.parseInt(barbeiroInfo[idx++]));
+			barbeiro.setNome(barbeiroInfo[idx++]);
+			barbeiro.setRg(barbeiroInfo[idx++]);
+			barbeiro.setCpf(barbeiroInfo[idx++]);
+			barbeiro.setTelefone(Integer.parseInt(barbeiroInfo[idx++]));
+			barbeiro.setCelular(Integer.parseInt(barbeiroInfo[idx++]));
+			barbeiroRepository.save(barbeiro);
+		}
 	}
+
+	public void criarHorario() {
+		String[][] horarioData = new String[][] { { "UMA HORA E 15 MINUTOS" }, { "DUAS HORAS E 15 MINUTOS" } };
+
+		for (String[] horarioInfo : horarioData) {
+			Horario horario = new Horario();
+			Calendar calendar = Calendar.getInstance();
+			int idx = 0;
+			horario.setDescricao(horarioInfo[idx++]);
+			if (horario.getDescricao().contains("UMA HORA E 15 MINUTOS")) {
+				calendar.set(Calendar.HOUR_OF_DAY, 1);
+				calendar.set(Calendar.MINUTE, 15);
+				calendar.set(Calendar.SECOND, 0);
+				horario.setHora(calendar.getTime());
+			} else {
+				calendar.set(Calendar.HOUR_OF_DAY, 2);
+				calendar.set(Calendar.MINUTE, 15);
+				calendar.set(Calendar.SECOND, 0);
+				horario.setHora(calendar.getTime());
+			}
+			horarioRepository.save(horario);
+		}
 	}
-	public void criarCliente(){
+
+	public void criarCliente() {
 		criarCliente();
 
 		String[][] clienteData = new String[][] {
-			{"1", "LUGOR", "50.037.334-6", "433044988/93", "46021192", "972932872"},
-			{"1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511"}	
-		};
-		for (String[] clienteInfo: clienteData){
+				{ "1", "LUGOR", "50.037.334-6", "433044988/93", "46021192", "972932872" },
+				{ "1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511" } };
+		for (String[] clienteInfo : clienteData) {
 			int idx = 0;
 			Cliente cliente = new Cliente();
 			cliente.setCodigo(Integer.parseInt(clienteInfo[idx++]));
@@ -112,7 +151,4 @@ public class RepositoryJdbcTestHelper {
 			clienteRepository.save(cliente);
 		}
 	}
-
-	
 }
-	

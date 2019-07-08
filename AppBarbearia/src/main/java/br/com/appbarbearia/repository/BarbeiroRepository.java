@@ -122,6 +122,7 @@ public class BarbeiroRepository extends JdbcRepository<Barbeiro> implements RowM
 	private int setValuesOnStatement(Barbeiro b, PreparedStatement stmt) throws SQLException {
 		int idx = 1;
 		stmt.setLong(idx++, b.getCodigoBarbearia());
+		stmt.setInt(idx++, b.getCodigoCidade());
 		stmt.setString(idx++, b.getNome());
 		stmt.setString(idx++, b.getRg());
 		stmt.setString(idx++, b.getCpf());
@@ -194,7 +195,7 @@ public class BarbeiroRepository extends JdbcRepository<Barbeiro> implements RowM
 	}
 
 	public String getInsert() {
-		return "INSERT INTO BARBEIRO (CODIGO_BARBEARIA, CODIGO_CIDADE, NOME, RG, CPF, TELEFONE, CELULAR, FOTO, DATA_NASCIMENTO, CADASTRO, ALTERADO VALUES(?,?,?,?,?,?,?,?,?,NOW(),NOW())";
+		return "INSERT INTO BARBEIRO (CODIGO_BARBEARIA, CODIGO_CIDADE, NOME, RG, CPF, TELEFONE, CELULAR, FOTO, DATA_NASCIMENTO, CADASTRO, ALTERADO) VALUES(?,?,?,?,?,?,?,?,?,NOW(),NOW())";
 	}
 
 	public String getUpdate() {

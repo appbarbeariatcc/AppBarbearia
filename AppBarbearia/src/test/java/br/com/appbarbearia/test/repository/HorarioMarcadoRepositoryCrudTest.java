@@ -49,7 +49,7 @@ public class HorarioMarcadoRepositoryCrudTest {
 		rjth.limpaBancoDeDados();
 		rjth.criarBarbeiro();
 		rjth.criarHorario();
-//		rjth.criarCliente();
+		rjth.criarCliente();
 	}
 
 	@Test
