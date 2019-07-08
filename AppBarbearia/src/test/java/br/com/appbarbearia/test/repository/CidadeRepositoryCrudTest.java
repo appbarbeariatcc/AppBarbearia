@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.appbarbearia.AppBarbearia.RunConfiguration;
@@ -35,7 +34,7 @@ public class CidadeRepositoryCrudTest {
 	public static final String CIDADE_NOME_2_ALTERADO = "Indaiatuba";
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	RepositoryJdbcTestHelper rjth;
 
 	@Autowired
 	CidadeRepository cidadeRepository;
@@ -45,8 +44,7 @@ public class CidadeRepositoryCrudTest {
 
 	@Test
 	public void test00_CleanUp() {
-		jdbcTemplate.execute("DELETE FROM CIDADE");
-		jdbcTemplate.execute("ALTER TABLE CIDADE AUTO_INCREMENT = 0");
+		rjth.limpaBancoDeDados();
 	}
 
 	@Test
@@ -85,14 +83,14 @@ public class CidadeRepositoryCrudTest {
 	public void test03_Update2() {
 		Optional<Cidade> opCidade = cidadeRepository.findByCodigo(codigoAdicionado2);
 		assertTrue(opCidade.isPresent());
-		
+
 		Cidade cidade = opCidade.get();
 		cidade.setNome(CIDADE_NOME_2_ALTERADO);
 		opCidade = cidadeRepository.save(cidade);
 		assertTrue(opCidade.isPresent());
-		
+
 		cidade = opCidade.get();
-		
+
 		assertEquals(cidade.getNome(), CIDADE_NOME_2_ALTERADO);
 		System.out.println("test03_Update2, Ok");
 	}
@@ -110,7 +108,7 @@ public class CidadeRepositoryCrudTest {
 		Optional<Cidade> opCidade = cidadeRepository.findByCodigo(codigoAdicionado1);
 		assertTrue(opCidade.isPresent());
 		cidadeRepository.delete(opCidade.get());
-		
+
 		opCidade = cidadeRepository.findByCodigo(codigoAdicionado1);
 		assertFalse(opCidade.isPresent());
 		System.out.println("Test05_delete1, Ok");
