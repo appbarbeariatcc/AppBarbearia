@@ -14,12 +14,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.appbarbearia.AppBarbearia.RunConfiguration;
 import br.com.appbarbearia.model.Cliente;
-import br.com.appbarbearia.model.Cidade;
-import br.com.appbarbearia.repository.CidadeRepository;
 import br.com.appbarbearia.repository.ClienteRepository;
 
 @RunWith(SpringRunner.class)
@@ -55,7 +54,7 @@ public class ClienteRepositoryCrudTest {
     ClienteRepository clienteRepository;
 
     @Autowired
-	CidadeRepository cidadeRepository;
+    JdbcTemplate jdbcTemplate;
 
     @Autowired
     RepositoryJdbcTestHelper rjth;
@@ -63,6 +62,7 @@ public class ClienteRepositoryCrudTest {
     @Test
     public void test00_CleanUp() {
         rjth.limpaBancoDeDados();
+        jdbcTemplate.execute("ALTER TABLE CIDADE AUTO_INCREMENT=0");
         rjth.criarCidade();
     }
 

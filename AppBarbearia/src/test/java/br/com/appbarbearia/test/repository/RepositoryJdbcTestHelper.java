@@ -99,6 +99,7 @@ public class RepositoryJdbcTestHelper {
 				{ "1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511" } };
 		for (String[] barbeiroInfo : barbeiroData) {
 			int idx = 0;
+			Calendar calendar = Calendar.getInstance();
 			Barbeiro barbeiro = new Barbeiro();
 			barbeiro.setCodigoCidade(Integer.parseInt(barbeiroInfo[idx++]));
 			barbeiro.setNome(barbeiroInfo[idx++]);
@@ -106,6 +107,13 @@ public class RepositoryJdbcTestHelper {
 			barbeiro.setCpf(barbeiroInfo[idx++]);
 			barbeiro.setTelefone(Integer.parseInt(barbeiroInfo[idx++]));
 			barbeiro.setCelular(Integer.parseInt(barbeiroInfo[idx++]));
+			if(barbeiro.getNome().contains("LUCAS")){
+				calendar.set(1998, 06, 20);
+				barbeiro.setDataNascimento(calendar.getTime());
+			} else {
+				calendar.set(1969, 10, 1);
+				barbeiro.setDataNascimento(calendar.getTime());
+			}
 			barbeiroRepository.save(barbeiro);
 		}
 	}
@@ -134,20 +142,26 @@ public class RepositoryJdbcTestHelper {
 	}
 
 	public void criarCliente() {
-		criarCliente();
-
 		String[][] clienteData = new String[][] {
 				{ "1", "LUGOR", "50.037.334-6", "433044988/93", "46021192", "972932872" },
 				{ "1", "LUIS", "11.111.111-6", "222222222/43", "46021192", "943026511" } };
 		for (String[] clienteInfo : clienteData) {
+			Calendar calendar = Calendar.getInstance();
 			int idx = 0;
 			Cliente cliente = new Cliente();
-			cliente.setCodigo(Integer.parseInt(clienteInfo[idx++]));
+			cliente.setCodigoCidade(Integer.parseInt(clienteInfo[idx++]));
 			cliente.setNome(clienteInfo[idx++]);
 			cliente.setRg(clienteInfo[idx++]);
 			cliente.setCpf(clienteInfo[idx++]);
 			cliente.setTelefone(Integer.parseInt(clienteInfo[idx++]));
 			cliente.setCelular(Integer.parseInt(clienteInfo[idx++]));
+			if (cliente.getNome().contains("LUCAS")) {
+				calendar.set(1997, 06, 20);
+				cliente.setDataNascimento(calendar.getTime());
+			} else {
+				calendar.set(1970, 06, 20);
+				cliente.setDataNascimento(calendar.getTime());
+			}
 			clienteRepository.save(cliente);
 		}
 	}

@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.appbarbearia.AppBarbearia.RunConfiguration;
@@ -44,9 +45,14 @@ public class HorarioMarcadoRepositoryCrudTest {
 	@Autowired
 	RepositoryJdbcTestHelper rjth;
 
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
 	@Test
 	public void test00_CleanUp() {
 		rjth.limpaBancoDeDados();
+		jdbcTemplate.execute("ALTER TABLE CIDADE AUTO_INCREMENT=0");
+		rjth.criarCidade();
 		rjth.criarBarbeiro();
 		rjth.criarHorario();
 		rjth.criarCliente();
@@ -88,7 +94,7 @@ public class HorarioMarcadoRepositoryCrudTest {
 		assertEquals(hm.getCodigoHorario(), HORARIO_MARCADO_CODIGO_HORARIO_2);
 		assertEquals(hm.getCodigoBarbeiro(), HORARIO_MARCADO_CODIGO_BARBEIRO_2);
 		assertEquals(hm.getCodigoCliente(), HORARIO_MARCADO_CODIGO_CLIENTE_2);
-		codigoAdicionado1 = opHorarioMarcado.get().getCodigo();
+		codigoAdicionado2 = opHorarioMarcado.get().getCodigo();
 		System.out.println("test02_Insert2, OK");
 	}
 

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,12 +65,14 @@ public class BarbeiroRepositoryCrudTest {
 	@Test
 	public void test00_CleanUp() {
 		rjth.limpaBancoDeDados();
+		jdbcTemplate.execute("ALTER TABLE CIDADE AUTO_INCREMENT = 0");
 		rjth.criarCidade();
 	}
 
 	@Test
 	public void test01_Insert1() {
 		Barbeiro barbeiro = new Barbeiro();
+		Calendar calendar = Calendar.getInstance();
 		barbeiro.setCodigoBarbearia(BARBEIRO_CODIGO_BARBEARIA_1);
 		barbeiro.setCodigoCidade(BARBEIRO_CODIGO_CIDADE_1);
 		barbeiro.setNome(BARBEIRO_NOME_1);
@@ -77,6 +80,8 @@ public class BarbeiroRepositoryCrudTest {
 		barbeiro.setCpf(BARBEIRO_CPF_1);
 		barbeiro.setTelefone(BARBEIRO_TELEFONE_1);
 		barbeiro.setCelular(BARBEIRO_CELULAR_1);
+		calendar.set(1995, 10, 1);
+		barbeiro.setDataNascimento(calendar.getTime());
 
 		Optional<Barbeiro> opBarbeiro = barbeiroRepository.save(barbeiro);
 		assertTrue(opBarbeiro.isPresent());
@@ -97,6 +102,7 @@ public class BarbeiroRepositoryCrudTest {
 	@Test
 	public void test02_Insert1() {
 		Barbeiro barbeiro = new Barbeiro();
+		Calendar calendar = Calendar.getInstance();
 		barbeiro.setCodigoBarbearia(BARBEIRO_CODIGO_BARBEARIA_2);
 		barbeiro.setCodigoCidade(BARBEIRO_CODIGO_CIDADE_2);
 		barbeiro.setNome(BARBEIRO_NOME_2);
@@ -104,6 +110,8 @@ public class BarbeiroRepositoryCrudTest {
 		barbeiro.setCpf(BARBEIRO_CPF_2);
 		barbeiro.setTelefone(BARBEIRO_TELEFONE_2);
 		barbeiro.setCelular(BARBEIRO_CELULAR_2);
+		calendar.set(1990, 10, 1);
+		barbeiro.setDataNascimento(calendar.getTime());
 
 		Optional<Barbeiro> opBarbeiro = barbeiroRepository.save(barbeiro);
 		assertTrue(opBarbeiro.isPresent());
