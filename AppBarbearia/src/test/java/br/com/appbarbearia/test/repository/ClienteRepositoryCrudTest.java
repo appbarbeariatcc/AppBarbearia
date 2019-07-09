@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.appbarbearia.AppBarbearia.RunConfiguration;
 import br.com.appbarbearia.model.Cliente;
+import br.com.appbarbearia.model.Cidade;
+import br.com.appbarbearia.repository.CidadeRepository;
 import br.com.appbarbearia.repository.ClienteRepository;
 
 @RunWith(SpringRunner.class)
@@ -51,6 +53,9 @@ public class ClienteRepositoryCrudTest {
 
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+	CidadeRepository cidadeRepository;
 
     @Autowired
     RepositoryJdbcTestHelper rjth;
@@ -99,7 +104,7 @@ public class ClienteRepositoryCrudTest {
         cliente.setCpf(CLIENTE_CPF_2);
         cliente.setTelefone(CLIENTE_TELEFONE_2);
         cliente.setCelular(CLIENTE_CELULAR_2);
-        calendar.set(1968, 04, 20);
+        calendar.set(1998, 06, 20);
         cliente.setDataNascimento(calendar.getTime());
 
         Optional<Cliente> opCliente = clienteRepository.save(cliente);
