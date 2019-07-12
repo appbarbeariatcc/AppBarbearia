@@ -46,13 +46,12 @@ public class BarbeiroService {
         if (opBarbeiro.isPresent()) {
             // Chama o método save, pois a repository já trata se é um save ou update
             opBarbeiro = save(barbeiro);
-            if (opBarbeiro.isPresent())
-                ;
-            LOG.info("Barbeiro alterado: " + opBarbeiro.get().toString());
-            return opBarbeiro;
-        } else {
-            LOG.info("Barbeiro informado não foi encontrado, portanto, não foi alterado");
-            return Optional.empty();
+            if (opBarbeiro.isPresent()) {
+                LOG.info("Barbeiro alterado: " + opBarbeiro.get().toString());
+                return opBarbeiro;
+            }
         }
+        LOG.info("Barbeiro informado não foi encontrado, portanto, não foi alterado");
+        return Optional.empty();
     }
 }

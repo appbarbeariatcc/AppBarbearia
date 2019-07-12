@@ -10,7 +10,7 @@ import br.com.appbarbearia.repository.ClienteRepository;
 
 public class ClienteService {
 
-    Logger LOG = Logger.getLogger(Cliente.class.getName());
+    Logger LOG = Logger.getLogger(ClienteService.class.getName());
 
     @Autowired
     ClienteRepository clienteRepository;
@@ -45,7 +45,7 @@ public class ClienteService {
                 return opCliente;
             }
         }
-        LOG.warning("Cliente não foi encontrado, nenhum registro foi alterado");;
+        LOG.warning("Cliente não foi encontrado, nenhum registro foi alterado");
         return Optional.empty();
     }
 
