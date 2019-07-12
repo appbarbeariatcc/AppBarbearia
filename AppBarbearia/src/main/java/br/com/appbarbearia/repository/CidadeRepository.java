@@ -156,7 +156,7 @@ public class CidadeRepository extends JdbcRepository<Cidade> implements RowMappe
 		return r;
 	}
 
-	public Optional<Cidade> findByCodigo(int codigo) {
+	public Optional<Cidade> findByCodigo(long codigo) {
 		String query = getSelect() + " WHERE CODIGO=?";
 		Object[] args = new Object[] { codigo };
 		return find(query, args);
