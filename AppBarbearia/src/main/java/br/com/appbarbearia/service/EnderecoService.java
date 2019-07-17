@@ -24,7 +24,7 @@ public class EnderecoService {
         return Optional.empty();
     }
 
-    public Optional<Endereco> findByCodigo(long codigo) {
+    public Optional<Endereco> findByCodigo(int codigo) {
         Optional<Endereco> opEndereco = enderecoRepository.findByCodigo(codigo);
         if (opEndereco.isPresent()) {
             LOG.info("Cliente de codigo " + codigo + ": " + opEndereco.get().toString());

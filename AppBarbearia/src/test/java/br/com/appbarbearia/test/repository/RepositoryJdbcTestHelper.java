@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import br.com.appbarbearia.model.Barbearia;
 import br.com.appbarbearia.model.Barbeiro;
 import br.com.appbarbearia.model.Cidade;
 import br.com.appbarbearia.model.Cliente;
@@ -107,7 +108,7 @@ public class RepositoryJdbcTestHelper {
 			barbeiro.setCpf(barbeiroInfo[idx++]);
 			barbeiro.setTelefone(Integer.parseInt(barbeiroInfo[idx++]));
 			barbeiro.setCelular(Integer.parseInt(barbeiroInfo[idx++]));
-			if(barbeiro.getNome().contains("LUCAS")){
+			if (barbeiro.getNome().contains("LUCAS")) {
 				calendar.set(1998, 06, 20);
 				barbeiro.setDataNascimento(calendar.getTime());
 			} else {
@@ -163,6 +164,30 @@ public class RepositoryJdbcTestHelper {
 				cliente.setDataNascimento(calendar.getTime());
 			}
 			clienteRepository.save(cliente);
+		}
+	}
+
+	public void criarBarbearia() {
+		criarEndereco();
+		String[][] barbeariaData = new String[][] {
+				{ "Barbearia do Juquinha", "A melhor barbearia da região... BY FAR", "1" },
+				{ "Barbearia do Zezinho", "Melhor do que a do Juquinha... BY THE WAY", "2" } };
+
+		for (String[] barbeariaInfo : barbeariaData) {
+			int idx = 0;
+			Calendar calendar = Calendar.getInstance();
+			Barbearia barbearia = new Barbearia();
+			barbearia.setNome(barbeariaInfo[idx++]);
+			barbearia.setDescricao(barbeariaInfo[idx++]);
+			barbearia.setCodigoEndereco(Integer.parseInt(barbeariaInfo[idx++]));
+			calendar.set(Calendar.HOUR_OF_DAY, 9);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			barbearia.setHorarioAbertura(calendar.getTime());
+			calendar.set(Calendar.HOUR_OF_DAY, 18);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			barbearia.setHorarioFechamento(calendar.getTime());
 		}
 	}
 }

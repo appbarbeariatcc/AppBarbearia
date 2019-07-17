@@ -168,6 +168,11 @@ public class HorarioMarcadoRepository extends JdbcRepository<HorarioMarcado> imp
 		return find(query, args);
 	}
 
+	public List<HorarioMarcado> list(String where, Object[] args) {
+		String query = getSelect() + where;
+		return jdbcTemplate.query(query, args, this);
+	}
+
 	private Optional<HorarioMarcado> find(String query, Object[] args) {
 		List<HorarioMarcado> result = jdbcTemplate.query(query, args, this);
 		if (result == null || result.isEmpty()) {

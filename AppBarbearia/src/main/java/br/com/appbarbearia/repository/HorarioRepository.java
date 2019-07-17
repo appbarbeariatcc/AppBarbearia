@@ -165,6 +165,11 @@ public class HorarioRepository extends JdbcRepository<Horario> implements RowMap
 		return find(query, args);
 	}
 
+	public List<Horario> list(String where, Object[] args) {
+		String query = getSelect() + where;
+		return jdbcTemplate.query(query, args, this);
+	}
+
 	private Optional<Horario> find(String query, Object[] args) {
 		List<Horario> result = jdbcTemplate.query(query, args, this);
 		if (result == null || result.isEmpty()) {
