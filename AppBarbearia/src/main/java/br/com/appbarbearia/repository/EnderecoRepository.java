@@ -159,7 +159,7 @@ public class EnderecoRepository extends JdbcRepository<Endereco> implements RowM
 		return r;
 	}
 
-	public Optional<Endereco> findByCodigo(int codigo) {
+	public Optional<Endereco> findByCodigo(long codigo) {
 		String query = getSelect() + " WHERE CODIGO=?";
 		Object[] args = new Object[] { codigo };
 		return find(query, args);
